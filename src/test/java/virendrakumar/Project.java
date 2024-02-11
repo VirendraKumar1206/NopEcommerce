@@ -1,4 +1,4 @@
-package virendraKumar;
+package virendrakumar;
 
 import java.io.File;
 import java.io.IOException;
