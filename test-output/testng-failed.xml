@@ -3,13 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="provider.data_provides">
+      <class name="NopCommerce_Project.Project">
         <methods>
-          <include name="teardown"/>
-          <include name="inputingData" invocation-numbers="5"/>
+          <include name="last"/>
+          <include name="extent"/>
+          <include name="testHoverAndClick1"/>
+          <include name="end"/>
           <include name="setup"/>
+          <include name="testHoverAndClick"/>
         </methods>
-      </class> <!-- provider.data_provides -->
+      </class> <!-- NopCommerce_Project.Project -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

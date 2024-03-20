@@ -1,4 +1,4 @@
-package provider;
+package NopCommerce_Project;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class Project {
 
 	@BeforeClass
 	public void extent() {
-		report = new ExtentReports(System.getProperty("user.dir") + "\\virendra.html");
+		ExtentReports report = new ExtentReports(System.getProperty("user.dir") + "\\virendra.html");
 		test = report.startTest("functionality testing");
 
 		
@@ -70,50 +70,6 @@ public class Project {
 	}
 
 	@Test(priority = 1, groups = {"sanity"})
-	public void testHoverAndClick1() throws InterruptedException, IOException {
-		
-		
-		WebElement computer = driver.findElement(By.xpath("//a[@href='/computers']"));
-		Actions actions = new Actions(driver);
-		actions.moveToElement(computer).build().perform();
-		test.log(LogStatus.PASS, "computer's hover is working");
-//		Thread.sleep(5000);
-		
-		driver.findElement(By.xpath("//a[@href='/software']")).click();
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@href='/software']")));
-		test.log(LogStatus.PASS, "software section is accessible");
-		
-		js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,350)", "");
-		driver.findElement(By.xpath("//a[@href='/windows-8-pro']")).click();
-		test.log(LogStatus.PASS, "product is clickable");
-//		Thread.sleep(3000);
-		
-		js.executeScript("window.scrollBy(0,350)", "");
-		Thread.sleep(4000);
-		driver.findElement(By.xpath("//button[@id='add-to-cart-button-11']")).click();
-		test.log(LogStatus.PASS, "add to is working");
-//		Thread.sleep(4000);
-		
-		driver.findElement(By.xpath("//a[@href='/cart']")).click();
-		test.log(LogStatus.PASS, "shopping cart is working");
-		js.executeScript("window.scrollBy(0,350)", "");
-//		Thread.sleep(3000);
-		
-		driver.findElement(By.xpath("//input[@id='termsofservice']")).click();
-		test.log(LogStatus.PASS, "term and condition box is clickable");
-		driver.findElement(By.id("checkout")).click();
-//		Thread.sleep(3000);
-		
-		TakesScreenshot shots = (TakesScreenshot) driver;
-		File file1 = shots.getScreenshotAs(OutputType.FILE);
-		File file2 = new File("C:\\Users\\HP\\Pictures\\TakeScreenshot\\image1.png");
-		FileUtils.copyFile(file1, file2);
-		test.log(LogStatus.PASS, "Ss functionality is working");
-	}
-	
-	@Test(priority = 2, groups = {"sanity"})
 	public void testHoverAndClick() throws InterruptedException, IOException {
 
 
@@ -121,7 +77,7 @@ public class Project {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(computer).build().perform();
 		test.log(LogStatus.PASS, "computer's hover is working");
-//		Thread.sleep(5000);
+
 
 		driver.findElement(By.xpath("//a[@href='/software']")).click();
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -132,42 +88,89 @@ public class Project {
 		js.executeScript("window.scrollBy(0,350)", "");
 		driver.findElement(By.xpath("//a[@href='/windows-8-pro']")).click();
 		test.log(LogStatus.PASS, "product is clickable");
-//		Thread.sleep(3000);
+
 
 		js.executeScript("window.scrollBy(0,350)", "");
 		Thread.sleep(4000);
 		driver.findElement(By.xpath("//button[text()='Add to wishlist']")).click();
 		test.log(LogStatus.PASS, "add to wishlist is working");
-//		Thread.sleep(4000);
+
 
 		driver.findElement(By.xpath("//a[@href='/wishlist']")).click();
 		test.log(LogStatus.PASS, "wishlist is clickable");
 		js.executeScript("window.scrollBy(0,350)", "");
-//		Thread.sleep(3000);
+
 
 		driver.findElement(By.xpath("//button[@class='button-2 email-a-friend-wishlist-button']")).click();
 		test.log(LogStatus.PASS, "term and condition box is clickable");
 //		driver.findElement(By.id("checkout")).click();
-//		Thread.sleep(3000);
+
+
 		
-	driver.findElement(By.xpath("//input[@id='FriendEmail']")).sendKeys("abcd@gmail.com");
+	driver.findElement(By.xpath("//input[@id='FriendEmail']")).sendKeys("abc@gmail.com");
 		Thread.sleep(3000);	
 		
-		driver.findElement(By.xpath("//input[@id='YourEmailAddress']")).sendKeys("abcd@gmail.com.");
+		driver.findElement(By.xpath("//input[@id='YourEmailAddress']")).sendKeys("abc@gmail.com");
 		Thread.sleep(3000);	
 		
 		TakesScreenshot shots = (TakesScreenshot) driver;
 		File file1 = shots.getScreenshotAs(OutputType.FILE);
-		File file2 = new File("C:\\Users\\HP\\Pictures\\TakeScreenshot\\image2.png");
+		File file2 = new File("C:\\Users\\HP\\Pictures\\TakeScreenshot\\image.png");
 		FileUtils.copyFile(file1, file2);
 		test.log(LogStatus.PASS, "Ss functionality is working");
 	}
 
+	@Test(priority = 2, groups = {"sanity"})
+	public void testHoverAndClick1() throws InterruptedException, IOException {
+
+
+		WebElement computer = driver.findElement(By.xpath("//a[@href='/computers']"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(computer).build().perform();
+		test.log(LogStatus.PASS, "computer's hover is working");
+
+
+		driver.findElement(By.xpath("//a[@href='/software']")).click();
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@href='/software']")));
+		test.log(LogStatus.PASS, "software section is accessible");
+
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,350)", "");
+		driver.findElement(By.xpath("//a[@href='/windows-8-pro']")).click();
+		test.log(LogStatus.PASS, "product is clickable");
+
+
+		js.executeScript("window.scrollBy(0,350)", "");
+		Thread.sleep(4000);
+		driver.findElement(By.xpath("//button[@id='add-to-cart-button-11']")).click();
+		test.log(LogStatus.PASS, "add to is working");
+
+
+		driver.findElement(By.xpath("//a[@href='/cart']")).click();
+		test.log(LogStatus.PASS, "shopping cart is working");
+		js.executeScript("window.scrollBy(0,350)", "");
+
+
+		driver.findElement(By.xpath("//input[@id='termsofservice']")).click();
+		test.log(LogStatus.PASS, "term and condition box is clickable");
+		driver.findElement(By.id("checkout")).click();
+
+
+		TakesScreenshot shots = (TakesScreenshot) driver;
+		File file1 = shots.getScreenshotAs(OutputType.FILE);
+		File file2 = new File("C:\\Users\\HP\\Pictures\\TakeScreenshot\\image.png");
+		FileUtils.copyFile(file1, file2);
+		test.log(LogStatus.PASS, "Ss functionality is working");
+	}
 	
 	@AfterMethod(alwaysRun = true)
 	public void last() {
-	driver.close();		
-	}
+		driver.close();
+		}
+		
+		
+	
 
 	@AfterClass
 	public void end() {

@@ -1,4 +1,4 @@
-package provider;
+package NopCommerce_Project;
 
 import java.io.IOException;
 
@@ -14,11 +14,11 @@ import org.testng.annotations.Test;
 
 public class data_provides {
 	WebDriver driver;
+	
 
-	@DataProvider(name = "getdata")
-
+	@DataProvider(name = "getdata")                                  
 	public Object[][] getdata() throws EncryptedDocumentException, IOException {
-		Extra get = new Extra();
+		Extract get = new Extract();
 		Object[][] data = get.getdatafromexel();
 		return data;
 	}
@@ -29,14 +29,18 @@ public class data_provides {
 		System.setProperty("webdriver.chrome.driver",
 				"C:\\Users\\HP\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
 
-		driver = new ChromeDriver();
+		driver = new ChromeDriver(); /*here we are creating an instance of the ChromeDriver class,
+		 which implements the WebDriver interface. This allows us to control and automate Google Chrome browser instances using Selenium WebDriver.
+		 */
+		
+		
 
 		driver.get("https://demo.nopcommerce.com/register?returnUrl=%2Fothers");
 
 		driver.manage().window().maximize();
 	}
 
-	@Test(dataProvider = "getdata")
+	@Test(dataProvider = "getdata")  //Specifies that the test method gets its data from the "getdata" data provider.
 	public void inputingData(String First, String Last, String Email, String Company, String Password,
 			String ConfirmPassword) throws InterruptedException {
 		WebElement fname = driver.findElement(By.xpath("//input[@id='FirstName']"));
