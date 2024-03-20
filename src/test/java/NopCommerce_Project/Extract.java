@@ -11,7 +11,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 public class Extract {
 	//It returns a two-dimensional array of Objects (Object[][]).
 	public Object[][] getdatafromexel() throws EncryptedDocumentException, IOException {
-		FileInputStream file = new FileInputStream(
+		FileInputStream file = new FileInputStream(//here we creating the an object of fileinputStream class and giving it excel file location as its para meter
 				"C:\\Users\\HP\\Documents\\workspace-spring-tool-suite-4-4.21.0.RELEASE\\Assign_project\\src\\test\\resources\\project1.xlsx");
 
 		/*
