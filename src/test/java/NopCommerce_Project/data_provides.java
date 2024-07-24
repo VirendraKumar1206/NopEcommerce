@@ -1,5 +1,4 @@
 package NopCommerce_Project;
-
 import java.io.IOException;
 
 import org.apache.poi.EncryptedDocumentException;
@@ -8,67 +7,81 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class data_provides {
-	WebDriver driver;
-	
+import AboutDataProvider.DataExtract;
 
-	@DataProvider(name = "getdata")                                  
-	public Object[][] getdata() throws EncryptedDocumentException, IOException {
-		Extract get = new Extract();
-		Object[][] data = get.getdatafromexel();
+public class Provider {
+WebDriver driver;
+	
+	@org.testng.annotations.DataProvider(name ="getdata")
+	public Object[][] getdata() throws EncryptedDocumentException, IOException{
+		
+		// crate an object of dataextract class
+		Nop_Commerce_project.DataExtract  get = new Nop_Commerce_project.DataExtract();
+		
+		Object [][] data = get.getdatafromexcel();
+		//calling data from excel
+		
 		return data;
 	}
 
-	@BeforeMethod
-	public void setup() {
+	  @BeforeTest
+	  public void setup() {
+	  System.setProperty("webdriver.chrome.driver", "C:\\Users\\admin\\Downloads\\chromedriver\\chromedriver-win64\\chromedriver.exe"  );
+	  
+	  driver = new ChromeDriver();
+	  
+	  driver.get("https://demo.nopcommerce.com/"); 
+	  driver.manage().window().maximize();
+	  
+	  }  
+	  
+	  @Test(dataProvider = "getdata")
+	  public void register(String FirstName, String LastName, String emailId, String password, String ConfirmPass) throws InterruptedException {
+			
+			//locate Register and click on it
+			driver.findElement(By.xpath("//a[@class='ico-register']")).click();
+					
+			//locate FirstName element
+			WebElement FirstName = driver.findElement(By.xpath("//input[@id='FirstName']"));
+					
+			//locate LastName element
+			WebElement LastName = driver.findElement(By.xpath("//input[@id='LastName']"));
+					
+			//locate Email element
+			WebElement Email = driver.findElement(By.xpath("//input[@name='Email']"));
+					
+			//locate Password element
+			WebElement Password = driver.findElement(By.xpath("//input[@name='Password']"));
+					
+			//locate ConfirmPassword element
+			WebElement ConfirmPassword = driver.findElement(By.xpath("//input[@name='ConfirmPassword']"));
+					
+			FirstName.sendKeys(FirstName);
+			LastName.sendKeys(LastName);
+			Email.sendKeys(emailId);
+			Thread.sleep(2000);
+			Password.sendKeys(password);
+			ConfirmPassword.sendKeys(ConfirmPass);
+			driver.findElement(By.xpath("//button[@id='register-button']")).click();
+			Thread.sleep(1000);
+			
+			
+		}
+		  
+		  
+	@AfterTest
+	  public void teardown() {
+		  driver.close();
+	  }
+	  
 
-		System.setProperty("webdriver.chrome.driver",
-				"C:\\Users\\HP\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
-
-		driver = new ChromeDriver(); /*here we are creating an instance of the ChromeDriver class,
-		 which implements the WebDriver interface. This allows us to control and automate Google Chrome browser instances using Selenium WebDriver.
-		 */
-		
-		
-
-		driver.get("https://demo.nopcommerce.com/register?returnUrl=%2Fothers");
-
-		driver.manage().window().maximize();
-	}
-
-	@Test(dataProvider = "getdata")  //Specifies that the test method gets its data from the "getdata" data provider.
-	public void inputingData(String First, String Last, String Email, String Company, String Password,
-			String ConfirmPassword) throws InterruptedException {
-		WebElement fname = driver.findElement(By.xpath("//input[@id='FirstName']"));
-		WebElement lname = driver.findElement(By.xpath("//input[@id='LastName']"));
-		WebElement email = driver.findElement(By.xpath("//input[@id='Email']"));
-		WebElement company = driver.findElement(By.xpath("//input[@id='Company']"));
-		WebElement pass = driver.findElement(By.xpath("//input[@id='Password']"));
-		WebElement cpass = driver.findElement(By.xpath("//input[@id='ConfirmPassword']"));
-
-		fname.sendKeys(First);
-		Thread.sleep(3000);
-		lname.sendKeys(Last);
-		Thread.sleep(3000);
-		email.sendKeys(Email);
-		Thread.sleep(3000);
-		company.sendKeys(Company);
-		Thread.sleep(3000);
-		pass.sendKeys(Password);
-		Thread.sleep(3000);
-		cpass.sendKeys(ConfirmPassword);
-		Thread.sleep(3000);
-		driver.findElement(By.xpath("//button[@id='register-button']")).click();
-
-	}
-
-	@AfterMethod
-	public void teardown() throws InterruptedException {
-		Thread.sleep(3000);
-		driver.close();
-	}
 }
+
+
+
+
