@@ -8,7 +8,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
-public class DataExtract {
+public class Extract {
 	public Object[][] getdatafromexcel() throws EncryptedDocumentException, IOException {
 		// getting data from excel and storing it
 		
