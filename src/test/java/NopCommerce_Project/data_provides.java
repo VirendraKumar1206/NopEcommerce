@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 import AboutDataProvider.DataExtract;
 
-public class Provider {
+public class data_Provider {
 WebDriver driver;
 	
 	@org.testng.annotations.DataProvider(name ="getdata")
